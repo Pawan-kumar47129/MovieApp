@@ -62,7 +62,7 @@ export const Login=async (req,res)=>{
       const tokenData={
         id:checkData._id
       }
-      const token=jwt.sign(tokenData,"secretkey23456543",{expiresIn:"1d"})
+      const token=jwt.sign(tokenData,process.env.SECRET_KEY,{expiresIn:"1d"})
       res.status(200).cookie("token",token,{httpOnly:true}).json({
         message:`welcome to my movie website ${checkData.fullname}!`,
         success:true

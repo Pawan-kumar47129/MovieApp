@@ -1,9 +1,10 @@
 //const express=require('express');
-import express, { Router } from "express";
+import express from "express";
 import dotenv from "dotenv"
 import mongoose from "mongoose"
 import bodyParser from "body-parser";
 import userRouter  from "./routes/registor.routes.js";
+import cors from "cors";
 const app=express();
 
 dotenv.config({
@@ -17,7 +18,10 @@ db.on('error',(err)=>{
 db.once("open", () => {
     console.log("Connected to MongoDB");
   });
-
+const corsOptions={
+    origin:"http://localhost:5173"
+}
+app.use(cors(corsOptions))// this using because when frotend call it assume the it call same port 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use("/api/v1/user",userRouter);
@@ -29,4 +33,4 @@ app.listen(process.env.PORT,(err)=>{
     else
         console.log(`server listen at port on ${process.env.PORT}`);
     
-})
+});
