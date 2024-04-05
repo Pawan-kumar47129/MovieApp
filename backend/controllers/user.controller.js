@@ -64,7 +64,7 @@ export const Login=async (req,res)=>{
       }
       const token=jwt.sign(tokenData,process.env.SECRET_KEY,{expiresIn:"1d"})
       res.status(200).cookie("token",token,{httpOnly:true}).json({
-        message:`welcome to my movie website ${checkData.fullname}!`,
+        message:`welcome ${checkData.fullname}! in Cinemamovie`,
         success:true
       })
     

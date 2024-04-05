@@ -19,7 +19,8 @@ db.once("open", () => {
     console.log("Connected to MongoDB");
   });
 const corsOptions={
-    origin:"http://localhost:5173"
+    origin:"http://localhost:5173",
+    credentials:true
 }
 app.use(cors(corsOptions))// this using because when frotend call it assume the it call same port 
 app.use(bodyParser.json());

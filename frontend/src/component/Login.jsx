@@ -1,34 +1,52 @@
 import React, { useState } from "react";
 import Header from "./Header";
 import axios from "axios";
+import toast from "react-hot-toast";
 import { API_END_POINT } from "../util/constant";
+import { useNavigate } from "react-router-dom";
 function Login() {
   const [isLogin, setIsLogin] = useState(false);
   const [fullname, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
   const swap = () => {
     setIsLogin(!isLogin);
   };
   const getInputData = async (e) => {
     e.preventDefault();
     if (isLogin) {
-      const loginData = { email, password };
-      console.log(loginData);
       try {
-        const res = await axios.post(`${API_END_POINT}/login`, loginData);
+        const loginData = { email, password };
+        const res = await axios.post(`${API_END_POINT}/login`, loginData, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        });
         console.log(res);
-      } catch (error) {
-        console.log("login", error);
+        if (res.data.success) {
+          toast.success(res.data.message);
+        }
+        navigate("/browse");
+      } catch (err) {
+        console.log("login", err);
+        toast.error(err.response.data.message);
       }
+      // for registor
     } else {
-      const regData = { fullname, email, password };
       try {
+        const regData = { fullname, email, password };
         console.log(regData);
-        const response = await axios.post(`${API_END_POINT}/registor`, regData);
-        console.log(response);
-      } catch (error) {
-        console.log("registor", error);
+        const res = await axios.post(`${API_END_POINT}/registor`, regData);
+        if (res.data.success) {
+          toast.success(res.data.message);
+        }
+        setIsLogin(true);
+        console.log(res);
+      } catch (err) {
+        toast.error(err.response.data.message);
+        console.log("registor", err);
       }
     }
     setFullName("");
