@@ -4,8 +4,8 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { API_END_POINT } from "../util/constant";
 import { useNavigate } from "react-router-dom";
-import {useDispatch} from "react-redux"
-import { setUser } from "../redux/userSlice";
+import {useDispatch,useSelector} from "react-redux"
+import { setLoding, setUser } from "../redux/userSlice";
 function Login() {
   const [isLogin, setIsLogin] = useState(false);
   const [fullname, setFullName] = useState("");
@@ -13,11 +13,11 @@ function Login() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const dispacth=useDispatch();
-  const swap = () => {
-    setIsLogin(!isLogin);
-  };
+  const isLoding=useSelector((store)=>store.app.isLoding);
+  const user=useSelector((store)=>store.app.user);
   const getInputData = async (e) => {
     e.preventDefault();
+    dispacth(setLoding(true));
     if (isLogin) {
       try {
         const loginData = { email, password };
@@ -36,6 +36,8 @@ function Login() {
       } catch (err) {
         console.log("login", err);
         toast.error(err.response.data.message);
+      }finally{
+        dispacth(setLoding(false))
       }
       // for registor
     } else {
@@ -51,6 +53,8 @@ function Login() {
       } catch (err) {
         toast.error(err.response.data.message);
         console.log("registor", err);
+      }finally{
+        dispacth(setLoding(false));
       }
     }
     setFullName("");
@@ -65,7 +69,7 @@ function Login() {
           backgroundImage: `url("https://cdn.mos.cms.futurecdn.net/rDJegQJaCyGaYysj2g5XWY.jpg")`,
         }}
       >
-        <Header />
+        {user && (<Header />)} {/*user present hoga tabhi header show */}
         <div className="flex items-center justify-center h-[80vh]">
           <form
             onSubmit={getInputData}
@@ -100,12 +104,12 @@ function Login() {
               placeholder="Password"
             />
             <button className="bg-red-600 text-white w-full py-1 rounded-lg hover:bg-indigo-600">
-              {isLogin ? "login" : "signup"}
+              {isLoding?"loding....":isLogin ? "login" : "signup"}
             </button>
             <p className="text-white ">
               {isLogin ? "New to Netflix?" : "Aready have an account?"}
               <span
-                onClick={swap}
+                onClick={()=>{setIsLogin(!isLogin);}}
                 className="ml-2 text-blue-800 text-lg cursor-pointer"
               >
                 {isLogin ? "signup" : "login"}
