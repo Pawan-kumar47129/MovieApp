@@ -4,12 +4,15 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { API_END_POINT } from "../util/constant";
 import { useNavigate } from "react-router-dom";
+import {useDispatch} from "react-redux"
+import { setUser } from "../redux/userSlice";
 function Login() {
   const [isLogin, setIsLogin] = useState(false);
   const [fullname, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const dispacth=useDispatch();
   const swap = () => {
     setIsLogin(!isLogin);
   };
@@ -28,6 +31,7 @@ function Login() {
         if (res.data.success) {
           toast.success(res.data.message);
         }
+        dispacth(setUser(res.data.user))//send the to store in global store
         navigate("/browse");
       } catch (err) {
         console.log("login", err);
