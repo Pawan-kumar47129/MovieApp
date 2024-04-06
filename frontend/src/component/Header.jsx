@@ -25,7 +25,7 @@ function Header() {
   }
   return (
     <>
-      <div className="flex justify-between bg-slate-400  px-4  mb-2 rounded-lg py-1 box-border ">
+      <div className="flex justify-between bg-slate-400  px-4  mb-2 rounded-lg py-1 box-border fixed top-4 z-50">
         <img
           className="h-10 w-10 rounded-lg"
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-S0qIPqTk2En23Y0ceUT7zc3tDwHxVA1QlD4GmCfAk75cMbmWfP84QgTQQGi4EnMl008&usqp=CAU"
