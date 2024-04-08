@@ -11,3 +11,5 @@ export const options = {
   export const topRatedMovieURL="https://api.themoviedb.org/3/movie/top_rated";
   export const upComingMovieURL="https://api.themoviedb.org/3/movie/upcoming";
   export const seachURL='https://api.themoviedb.org/3/discover/movie?include_adult=true&include_video=true&language=hindi-India&page=1&sort_by=popularity.desc';
+  const SearchURL="https://api.themoviedb.org/3/search/movie?query="
+  export const Banner_URL="https://image.tmdb.org/t/p/w500"

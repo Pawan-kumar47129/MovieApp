@@ -1,11 +1,14 @@
-
-function VideoBackground() {
+import useMovieById from "../hooks/useMovieById";
+import {useSelector} from "react-redux"
+function VideoBackground({movieId}) {
+  useMovieById(movieId);
+  const trailerMovie=useSelector(store=>store.movie.trailerMovie);
   return (
     <>
-    <div className="w-screen h-screen overflow-hidden -ml-5 flex justify-center items-center">
+    <div className="w-[vw] h-full overflow-hidden -ml-5 flex justify-center items-center mx-auto">
       <iframe
-        className="w-[220%] h-[420%]"
-        src="https://www.youtube.com/embed/LXb3EKWsInQ?si=S7s5BHuRZD29t7S0&autoplay=1&mute=1&loop=1"
+        className="w-screen aspect-video"
+        src={`https://www.youtube.com/embed/${trailerMovie?.key}?si=S7s5BHuRZD29t7S0&autoplay=1&mute=1&loop=1`}
         allowFullScreen 
         title="Embedded Content"
       ></iframe>

@@ -9,9 +9,11 @@ import useNowPlayingMovies from "../hooks/useNowPlayingMovies";
 import usePopularMovies from "../hooks/usePopularMovies";
 import useTopRatedMovies from "../hooks/useTopRatedMovies"
 import useUpComingMovies from "../hooks/useUpComingMovies";
+import SearchBox from "./SearchBox"
 
 function Browse() {
   const user = useSelector((store) => store.app.user);
+  const isSearch=useSelector((store)=>store.movie.searchToggle);
   const navigate = useNavigate();
   useNowPlayingMovies();
   usePopularMovies();
@@ -19,15 +21,20 @@ function Browse() {
   useUpComingMovies();
   useEffect(() => {
     if (!user) {
-      navigate("/browse");
+      navigate("/");
     }
   },[]);
   return (
     <>
       <Header />
-      <div>
+      <div className="bg-slate-500">
+        {
+          isSearch?<SearchBox/>:
+        <>
       <MainContainer/>
       <MovieContainer/>
+      </>
+      }
       </div>
     </>
   );

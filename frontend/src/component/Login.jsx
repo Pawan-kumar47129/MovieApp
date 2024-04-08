@@ -27,7 +27,6 @@ function Login() {
           },
           withCredentials: true,
         });
-        console.log(res);
         if (res.data.success) {
           toast.success(res.data.message);
         }
@@ -80,7 +79,7 @@ function Login() {
             </h1>
             {!isLogin && (
               <input
-                className="px-4 py-2 w-[20rem] outline-none rounded-lg"
+                className="px-4 py-2 max-w-[20rem] outline-none rounded-lg"
                 value={fullname}
                 onChange={(e) => setFullName(e.target.value)}
                 type="text"
@@ -88,14 +87,14 @@ function Login() {
               />
             )}
             <input
-              className="px-4 py-2 w-[20rem] outline-none rounded-lg"
+              className="px-4 py-2 max-w-[20rem] outline-none rounded-lg"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               type="email"
               placeholder="Email"
             />
             <input
-              className="px-4 py-2 w-[20rem] outline-none rounded-lg"
+              className="px-4 py-2 max-w-[20rem] outline-none rounded-lg"
               value={password}
               onChange={(e) => {
                 setPassword(e.target.value);
