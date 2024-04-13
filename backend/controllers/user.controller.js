@@ -18,8 +18,8 @@ export const Registor = async(req, res) => {
       });
     } else {
       const createdUser = await userModel.create({
-        fullname: fullname,
-        email: email,
+        fullname: fullname.toLowerCase(),
+        email: email.toLowerCase(),
         password: bcrypt.hashSync(password,16)
       });
       return res.status(201).json({
@@ -45,7 +45,7 @@ export const Login=async (req,res)=>{
         success:false,
       });
     }
-      const checkData=await userModel.findOne({email:email});
+      const checkData=await userModel.findOne({email:email.toLowerCase()});
       if(!checkData){
         return res.status(401).json({
           message:"Invalid email or password",
@@ -62,7 +62,7 @@ export const Login=async (req,res)=>{
       const tokenData={
         id:checkData._id
       }
-      const token=jwt.sign(tokenData,process.env.SECRET_KEY,{expiresIn:"1d"})
+      const token=jwt.sign(tokenData,process.env.SECRET_KEY,{expiresIn:"1d"});
       res.status(200).cookie("token",token,{httpOnly:true}).json({
         message:`welcome ${checkData.fullname}! in Cinemamovie`,
         user:{

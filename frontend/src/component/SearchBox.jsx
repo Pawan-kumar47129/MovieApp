@@ -19,7 +19,7 @@ function SearchBox() {
     console.log(searchMovie);
     try {
       const res = await axios.get(
-        `https://api.themoviedb.org/3/search/movie?query=${searchMovie.toLowerCase()}&include_adult=false&language=en-US&page=1,2`,
+        `https://api.themoviedb.org/3/search/movie?query=${searchMovie.toLowerCase()}&include_adult=false&language=en-US&page=1`,
         options
       );
       console.log(res.data.results);
