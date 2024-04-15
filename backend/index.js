@@ -32,6 +32,6 @@ app.listen(process.env.PORT,(err)=>{
     if(err)
         console.log(`sever not start some error occure ${err}`);
     else
-        console.log(`server listen at port on ${process.env.PORT}`);
+        console.log(`server listen at port on ${process.env.PORT||8000}`);
     
 });

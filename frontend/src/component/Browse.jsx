@@ -34,9 +34,9 @@ function Browse() {
         <>
       <MainContainer/>
       <MovieContainer/>
+      <Footer/>
       </>
       }
-      <Footer/>
       </div>
     </>
   );

@@ -49,7 +49,7 @@ function Bottom() {
               className="text-xl font-medium text-white hover:underline"
               to="/Contect"
             >
-              About
+              Contact Us
             </Link>
           </div>
         </div>
